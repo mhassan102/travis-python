@@ -11,11 +11,11 @@ before_install:
 
 script:
   # Run container in detached state
-  # sudo docker run -itd --privileged --name=ansiblecon --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ansiblepoc
+  - sudo docker run -itd --privileged --name=ansiblecon --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ansiblepoc:latest
   - sudo docker images
   # Check syntax of ansible playbook
-  # sudo docker exec -it ansiblepoc ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml --syntax-check
-  # sudo docker exec -it ansiblepoc ansible --version
+  - sudo docker exec -it ansiblecon ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml --syntax-check
+  - sudo docker exec -it ansiblecon ansible --version
   # Run ansible playbook
-  # sudo docker exec -it ansiblepoc ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml
+  - sudo docker exec -it ansiblecon ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml
 
