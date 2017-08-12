@@ -1,31 +1,19 @@
 ---
 sudo: required
-dist: trusty
 
-language: python
-python: "2.7"
-
-env:
-  - ANSIBLE_VERSION=2.2.1.0
-
-branches:
-  only:
-    - master
+services:
+  - docker
 
 before_install:
-  - sudo apt-get update -qq
+  # Fetch base image and build new container
+  - sudo docker pull ubuntu:14.04
 
-install:
-  # Install Ansible.
-  - pip install ansible==$ANSIBLE_VERSION
 
 script:
-  # Check the role/playbook's syntax.
-  - ansible-playbook -i play/inventory play/test.yml
-  #- ansible-playbook -i tests/inventory tests/test.yml --syntax-check
-  - python hello.py
-  - docker version
-
-  # Run the role/playbook with ansible-playbook.
-  #- ansible-playbook -i tests/inventory tests/test.yml --skip-tags update,copy_host_ssh_id
+  # Run container in detached state
+  - sudo docker run --detach --privileged --volume="${PWD}":/etc/ansible/roles/role_under_test:ro --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro travispoc /usr/lib/systemd/systemd > /tmp/container_id
+  # Check syntax of ansible playbook
+  - sudo docker exec "$(cat /tmp/container_id)" ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml --syntax-check
+  # Run ansible playbook
+  - sudo docker exec "$(cat /tmp/container_id)" ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml
 
