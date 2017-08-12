@@ -1,6 +1,8 @@
 ---
-- hosts: localhost
-  connection: local
+- name: Bash converted playbook
+  connection: localhost
+  hosts: localhost
+  remote_user: ubuntu
   environment:
     PWD: /home/ubuntu
   tasks:
@@ -24,3 +26,15 @@
     - python-pip
     - chromium-browser
     - chromium-chromedriver
+  - name: mkdir /media/scraped
+    sudo: 'no'
+    file:
+      path: /media/scraped
+      state: directory
+  - name: chown ubuntu:ubuntu /media/scraped
+    sudo: 'no'
+    file:
+      dest: /media/scraped
+      group: ubuntu
+      owner: ubuntu
+      recurse: 'yes'
