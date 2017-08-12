@@ -7,11 +7,11 @@ services:
 before_install:
   # Fetch base image and build new container
   - sudo docker pull ubuntu:14.04
-
+  - sudo docker build --rm=true --tag=ansiblepoc .
 
 script:
   # Run container in detached state
-  - sudo docker run --detach --privileged --volume="${PWD}":/etc/ansible/roles/role_under_test:ro --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro ubuntu:14.04 /usr/lib/systemd/systemd > /tmp/container_id
+  - sudo docker run -itd --privileged --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ansiblepoc
   # Check syntax of ansible playbook
   - sudo docker exec "$(cat /tmp/container_id)" ansible-playbook /etc/ansible/roles/role_under_test/play/test.yml --syntax-check
   # Run ansible playbook
