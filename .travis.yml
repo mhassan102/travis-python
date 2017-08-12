@@ -24,6 +24,7 @@ script:
   - ansible-playbook -i play/inventory play/test.yml
   #- ansible-playbook -i tests/inventory tests/test.yml --syntax-check
   - python hello.py
+  - docker version
 
   # Run the role/playbook with ansible-playbook.
   #- ansible-playbook -i tests/inventory tests/test.yml --skip-tags update,copy_host_ssh_id
