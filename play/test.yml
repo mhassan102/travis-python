@@ -1,6 +1,26 @@
 ---
 - hosts: localhost
   connection: local
+  environment:
+    PWD: /home/ubuntu
   tasks:
-    - ping:
-    - setup:
+  - name: Set default working directory
+    set_fact:
+      cwd: /home/ubuntu
+  - name: sudo apt-get update;
+    sudo: 'yes'
+    apt:
+      update_cache: 'yes'
+  - name: sudo apt-get dist-upgrade -y;
+    sudo: 'yes'
+    apt:
+      upgrade: dist
+  - name: sudo apt-get install -y python-pip chromium-browser chromium-chromedriver
+    sudo: 'yes'
+    apt:
+      name: '{{ item }}'
+      state: present
+    with_items:
+    - python-pip
+    - chromium-browser
+    - chromium-chromedriver
