@@ -25,6 +25,7 @@ environment:
 
 init:
   - "ECHO %PYTHON_VERSION% %MINICONDA%"
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
 
 
 install:
