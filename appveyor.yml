@@ -67,8 +67,7 @@ install:
       {
         Write-Host "TRUE"
       }
-
-
+  - travis_retry pip install numpy
   # If there is a newer build queued for the same PR, cancel this one.
   # The AppVeyor 'rollout builds' option is supposed to serve the same
   # purpose but it is problematic because it tends to cancel builds pushed
@@ -110,6 +109,7 @@ install:
 build_script:
   # Build the compiled extension
   - "%CMD_IN_ENV% python hello.py"
+  - "%CMD_IN_ENV% travis_retry python hello.py"
 
 test_script:
   # Run the project tests
