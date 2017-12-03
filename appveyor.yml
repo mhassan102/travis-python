@@ -18,7 +18,7 @@ environment:
       PYTHON_ARCH: "32"
       MINICONDA: "C:\\Miniconda"
       USE_CONDA: false
-
+      TEST_REGISTRY: true
     #- PYTHON: "C:\\Python27.10-x64"
     #  PYTHON_VERSION: "2.7.10"
     #  PYTHON_ARCH: "64"
@@ -41,6 +41,7 @@ install:
   #  )
   # Prepend chosen Python to the PATH of this build
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - "SET PATH=%TEST_REGISTRY%;%TEST_REGISTRY%\\Scripts;%PATH%"
   # Check that we have the expected version and architecture for Python
   - "python --version"
   # Install the conda supplied packages if using conda, otherwise use pip
@@ -59,6 +60,12 @@ install:
         pip install --upgrade pip
         pip install -U pip
         pip install -U numpy pytest
+      }
+
+  - ps: |
+      if($env:TEST_REGISTRY -match "true")
+      {
+        Write-Host "TRUE"
       }
 
 
