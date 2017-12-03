@@ -30,7 +30,7 @@ init:
 install:
   - echo $(python --version)
   - |
-    if (%USE_CONDA% == true)
+    if (%USE_CONDA% -eq "true")
     {
       conda create --yes -n quilt_env python=$QPYVER pip
       source activate quilt_env
