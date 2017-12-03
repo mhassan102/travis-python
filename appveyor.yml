@@ -17,8 +17,7 @@ environment:
       PYTHON_VERSION: "2.7.10"
       PYTHON_ARCH: "32"
       MINICONDA: "C:\\Miniconda"
-      environment:
-        USE_CONDA: false
+      USE_CONDA: false
 
     - PYTHON: "C:\\Python27.10-x64"
       PYTHON_VERSION: "2.7.10"
