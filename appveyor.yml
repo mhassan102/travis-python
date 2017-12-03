@@ -68,7 +68,6 @@ install:
         Write-Host "TRUE"
         python test.py
       }
-  - travis_retry pip install numpy
   # If there is a newer build queued for the same PR, cancel this one.
   # The AppVeyor 'rollout builds' option is supposed to serve the same
   # purpose but it is problematic because it tends to cancel builds pushed
