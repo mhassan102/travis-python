@@ -66,7 +66,7 @@ install:
       if($env:TEST_REGISTRY -match "true")
       {
         Write-Host "TRUE"
-        python "$env:APPVEYOR_BUILD_FOLDER\test.py"
+        python "$env:APPVEYOR_BUILD_FOLDER\hello.py"
       }
   # If there is a newer build queued for the same PR, cancel this one.
   # The AppVeyor 'rollout builds' option is supposed to serve the same
