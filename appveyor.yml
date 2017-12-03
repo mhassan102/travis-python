@@ -29,16 +29,16 @@ init:
 
 install:
   - echo $(python --version)
-  - ps: |
-        if (%USE_CONDA% -eq "true") { 
-           conda create --yes -n quilt_env python=$QPYVER pip
-           source activate quilt_env
-           pip install pytest
-        }
-        else { 
-          pip install -U pip
-          pip install -U numpy pytest
-        }
+  - |
+    if [%USE_CONDA%]==[true](
+      conda create --yes -n quilt_env python=$QPYVER pip
+      source activate quilt_env
+      pip install pytest
+    )
+    else (
+      pip install -U pip
+      pip install -U numpy pytest
+    )
   # If there is a newer build queued for the same PR, cancel this one.
   # The AppVeyor 'rollout builds' option is supposed to serve the same
   # purpose but it is problematic because it tends to cancel builds pushed
