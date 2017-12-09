@@ -14,6 +14,8 @@ machine:
 
 test:
   override:
+    - lsb_release -a
     - echo $(python --version)
-    - python hello.py
+    - ls
+    - pwd
 
