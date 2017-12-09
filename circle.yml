@@ -1,0 +1,19 @@
+general:
+  build_dir: ios-app
+
+machine:
+
+  xcode:
+    version: 8.2
+
+  python:
+    version: 3.5.1
+
+
+
+
+test:
+  override:
+    - echo $(python --version)
+    - python hello.py
+
