@@ -27,7 +27,8 @@ dependencies:
 #    - pwd
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) pyenv local 3.5.1 && echo $(python --version) ;; 1) pyenv local 2.7.10 && echo $(python --version) ;; esac:
+    #- case $CIRCLE_NODE_INDEX in 0) pyenv local 3.5.1 && echo $(python --version) ;; 1) pyenv local 2.7.10 && echo $(python --version) ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) echo "123" ;; 1) echo "456" ;; esac:
       parallel: true
     # Check PyQt5
     #- export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt5" && echo $(python --version)
