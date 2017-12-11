@@ -29,8 +29,12 @@ test:
   override:
     - ? |
         case $CIRCLE_NODE_INDEX in
-          0) pyenv local 3.6.1 ;;
-          1) pyenv local 3.5.1 ;;
+          0) pyenv local 3.5.1 
+             echo "1234"
+             ;;
+          1) pyenv local 3.6.1
+             echo "5678"
+             ;;
         esac
       :
         parallel: true
