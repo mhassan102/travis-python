@@ -17,4 +17,4 @@ test:
     - echo $(python --version)
     - ls
     - pwd
-    #- pyenv versions
+    ##- pyenv versions
