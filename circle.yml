@@ -30,7 +30,7 @@ test:
         parallel: true
 
   post:
-    - echo $(python --version)
+    - echo $(python --version):
         parallel: true
     #- case $CIRCLE_NODE_INDEX in 0) pyenv local 3.5.1 && echo $(python --version) ;; 1) pyenv local 2.7.10 && echo $(python --version) ;; esac:
     #- case $CIRCLE_NODE_INDEX in 0) echo "123" ;; 1) echo "456" ;; esac:
