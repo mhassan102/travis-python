@@ -6,32 +6,17 @@ machine:
   xcode:
     version: 8.2
 
-  python:
-    version: 2.6.8
 
 dependencies:
-  pre:
-    - if [ $CIRCLE_NODE_INDEX == "1" ] ; then pyenv global 2.7.9 ; fi
-
-  post:
-    - pyenv global 2.7.12 3.4.4
-
-  #python:
-  #  version: 3.5.1
-
-  #python:
-  #  version: 3.5.2
-
+  override:
+    - pip install tox tox-pyenv
+    - pyenv local 2.6.8 2.7.10 3.3.3 3.4.3 3.5.0
 
 
 test:
   override:
     - lsb_release -a
-        parallel: true
     - echo $(python --version)
-        parallel: true
     - ls
-        parallel: true
     - pwd
-        parallel: true
 
