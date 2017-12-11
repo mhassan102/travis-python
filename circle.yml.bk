@@ -6,13 +6,6 @@ machine:
   xcode:
     version: 8.2
 
-  python:
-    version: 2.6.8
-
-dependencies:
-  pre:
-    - if [ $CIRCLE_NODE_INDEX == "1" ] ; then pyenv global 2.7.9 ; fi
-
   post:
     - pyenv global 2.7.12 3.4.4
 
@@ -27,11 +20,7 @@ dependencies:
 test:
   override:
     - lsb_release -a
-        parallel: true
     - echo $(python --version)
-        parallel: true
     - ls
-        parallel: true
     - pwd
-        parallel: true
 
