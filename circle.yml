@@ -1,30 +1,18 @@
-#general:
-#  build_dir: ios-app
-
 machine:
 
   xcode:
     version: 8.2
 
   environment:
-    PY_VERSIONS: "3.6 3.5"
+    PY_VERSIONS: "3.5 3.6"
 
 
 dependencies:
   override:
-    #- pip install tox tox-pyenv
-    #- pyenv local 2.7.10 3.5.1
-    # First convert PY_VERSIONS to an array and then select the python version based on the CIRCLE_NODE_INDEX
     - export PY_VERSIONS=($PY_VERSIONS) &&
-      export TRAVIS_PYTHON_VERSION=${PY_VERSIONS[$CIRCLE_NODE_INDEX]} && 
-      echo -e "PYTHON = $TRAVIS_PYTHON_VERSION \n============";
+      export CIRCLE_PYTHON_VERSION=${PY_VERSIONS[$CIRCLE_NODE_INDEX]} && 
+      echo -e "PYTHON = $CIRCLE_PYTHON_VERSION \n============";
 
-#test:
-#  override:
-#    - lsb_release -a
-#    - echo $(python --version)
-#    - ls
-#    - pwd
 test:
   override:
     - ? |
@@ -39,6 +27,7 @@ test:
              ;;
         esac
       :
+    - echo $(python --version)
         parallel: true
     #- case $CIRCLE_NODE_INDEX in 0) pyenv local 3.5.1 && echo $(python --version) ;; 1) pyenv local 2.7.10 && echo $(python --version) ;; esac:
     #- case $CIRCLE_NODE_INDEX in 0) echo "123" ;; 1) echo "456" ;; esac:
