@@ -1,5 +1,5 @@
-general:
-  build_dir: ios-app
+#general:
+#  build_dir: ios-app
 
 machine:
 
