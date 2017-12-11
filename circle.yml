@@ -29,10 +29,10 @@ test:
   override:
     # Check PyQt5
     #- export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt5" && echo $(python --version)
-    - echo $(python --version):
+    - if [ "$CIRCLE_NODE_INDEX" == "0" ]; then pyenv local 3.6 && echo $(python --version):
         parallel: true
     # Check PyQt4 (but not on Python 3.6)
     #- if [ "$CIRCLE_NODE_INDEX" != "0" ]; then export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt4v2" && wxho $(python --version)
-    - echo $(python --version):
+    - if [ "$CIRCLE_NODE_INDEX" == "0" ]; then pyenv local 3.5 && echo $(python --version):
         parallel: true
 
