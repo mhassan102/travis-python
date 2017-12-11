@@ -7,7 +7,7 @@ machine:
     version: 8.2
 
   environment:
-    PY_VERSIONS: "3.5 3.6"
+    PY_VERSIONS: "3.6 3.5"
 
 
 dependencies:
@@ -29,8 +29,8 @@ test:
   override:
     - ? |
         case $CIRCLE_NODE_INDEX in
-          0) pyenv local 3.5.1 ;;
-          1) pyenv local 3.6.1 ;;
+          0) pyenv local 3.6.1 ;;
+          1) pyenv local 3.5.1 ;;
         esac
       :
         parallel: true
