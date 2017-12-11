@@ -17,7 +17,7 @@ dependencies:
     # First convert PY_VERSIONS to an array and then select the python version based on the CIRCLE_NODE_INDEX
     - export PY_VERSIONS=($PY_VERSIONS) &&
       export TRAVIS_PYTHON_VERSION=${PY_VERSIONS[$CIRCLE_NODE_INDEX]} && 
-      echo -e "PYTHON = $TRAVIS_PYTHON_VERSION \n============" &&
+      echo -e "PYTHON = $TRAVIS_PYTHON_VERSION \n============";
 
 #test:
 #  override:
@@ -28,9 +28,11 @@ dependencies:
 test:
   override:
     # Check PyQt5
-    - export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt5" && echo $(python --version)
+    #- export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt5" && echo $(python --version)
+    - echo $(python --version):
         parallel: true
     # Check PyQt4 (but not on Python 3.6)
-    - if [ "$CIRCLE_NODE_INDEX" != "0" ]; then export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt4v2" && wxho $(python --version)
+    #- if [ "$CIRCLE_NODE_INDEX" != "0" ]; then export PATH="$HOME/miniconda/bin:$PATH" && source activate test && export PYTEST_QT_API="pyqt4v2" && wxho $(python --version)
+    - echo $(python --version):
         parallel: true
 
