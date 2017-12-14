@@ -3,30 +3,14 @@ machine:
   xcode:
     version: 8.2
 
-  environment:
-    PY_VERSIONS: "3.5 3.6"
 
 
 dependencies:
   override:
-    - export PY_VERSIONS=($PY_VERSIONS) &&
-      export CIRCLE_PYTHON_VERSION=${PY_VERSIONS[$CIRCLE_NODE_INDEX]} && 
-      echo -e "PYTHON = $CIRCLE_PYTHON_VERSION \n============";
+    - pip install tox tox-pyenv
+    - pyenv local 2.6.8 2.7.10 3.3.3 3.4.3 3.5.0
 
 test:
-  override:
-    - ? |
-        case $CIRCLE_NODE_INDEX in
-          0) pyenv local 3.5.1 
-             echo $(python --version)
-             ;;
-          1) pyenv local 3.6.1
-             echo $(python --version)
-             ;;
-        esac
-      :
-        parallel: true
 
   post:
-    - echo $(python --version):
-        parallel: true
+    - python --version
