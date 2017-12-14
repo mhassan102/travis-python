@@ -18,11 +18,9 @@ test:
     - ? |
         case $CIRCLE_NODE_INDEX in
           0) pyenv local 3.5.1 
-             echo "1234"
              echo $(python --version)
              ;;
           1) pyenv local 3.6.1
-             echo "5678"
              echo $(python --version)
              ;;
         esac
