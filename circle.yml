@@ -1,16 +1,38 @@
 machine:
 
   xcode:
-    version: 8.2
+    version: 9.0
+
+  environment:
+    TEST_REGISTRY: false
+    QPYVER: 3.5
+    QUILT_SERVER_CONFIG: dev_config.py
+    FLASK_APP: quilt_server
+    FLASK_DEBUG: 1
 
 
+  pre:
+    - curl -o mconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    - chmod +x mconda.sh
+    - ./mconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH" && echo $PATH
+    - $HOME/miniconda/bin/conda search "^python$"
+    - export PATH="$HOME/miniconda/bin:$PATH"  && conda create --yes -n quilt_env python=3.5.1 pip
+    - export PATH="$HOME/miniconda/bin:$PATH" && source activate quilt_env
+    - export PATH="$HOME/miniconda/bin:$PATH" && pip install pytest --user
 
 dependencies:
   override:
     - pip install tox tox-pyenv
     - pyenv local 2.7.10 3.5.0
 
-test:
-
   post:
+    - echo -r "Installing dependency"
+    - export PATH="$HOME/miniconda/bin:$PATH" && python --version
+
+test:
+  override:
+    - echo -r "Running Compiler/Registry Test with $(python --version)"
     - python --version
+
+
